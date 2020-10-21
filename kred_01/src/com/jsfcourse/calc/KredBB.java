@@ -83,6 +83,13 @@ public class KredBB {
 		return null;
 	}
 
+	// Put result in messages on AJAX call
+		public String calc_AJAX() {
+			if (doTheMath()) {
+				ctx.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Rata: " + rata, null));
+			}
+			return null;
+		}
 	public String info() {
 		return "info";
 	}

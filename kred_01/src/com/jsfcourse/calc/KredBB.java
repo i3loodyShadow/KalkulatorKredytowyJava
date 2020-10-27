@@ -3,7 +3,6 @@ package com.jsfcourse.calc;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -11,37 +10,33 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 //@SessionScoped
 public class KredBB {
-	private String kwota;
-	private String lat;
-	private String procent;
-	private Double odsetki;
-	private Double doSplaty;
-	private Double rata;
+	private Double kwota, lat, procent; //pola pobrane od u¿ytkownika
+	private Double odsetki, doSplaty, rata; //pola wyliczane przez funkcjê doTheMath
 	
 	@Inject
 	FacesContext ctx;
 
-	public String getKwota() {
+	public Double getKwota() {
 		return kwota;
 	}
 
-	public void setKwota(String kwota) {
+	public void setKwota(Double kwota) {
 		this.kwota = kwota;
 	}
 
-	public String getLat() {
+	public Double getLat() {
 		return lat;
 	}
 
-	public void setLat(String lat) {
+	public void setLat(Double lat) {
 		this.lat = lat;
 	}
 
-	public String getProcent() {
+	public Double getProcent() {
 		return procent;
 	}
 
-	public void setProcent(String procent) {
+	public void setProcent(Double procent) {
 		this.procent = procent;
 	}
 	
@@ -55,9 +50,6 @@ public class KredBB {
 
 	public boolean doTheMath() {
 		try {
-			double kwota = Double.parseDouble(this.kwota);
-			double lat = Double.parseDouble(this.lat);
-			double procent = Double.parseDouble(this.procent);
 
 			odsetki = procent * (lat*12);
 			doSplaty = kwota + (kwota*(odsetki/100));
